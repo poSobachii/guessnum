@@ -1,21 +1,26 @@
 package guessnum;
 
-import java.util.InputMismatchException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static Random rand = new Random();
     static Scanner scan = new Scanner(System.in);
+    static List<GameResult> results = new ArrayList<>();
 
     public static void main(String[] args) {
         String answer;
+
         do {
+            System.out.println("Enter your name ?");
+            String name = scan.next();
+
+
             int myNum = rand.nextInt(100) + 1;
+
 
             boolean userLost = true;
             for (int i = 1; i <= 10; i++) {
-                System.out.println("Try #" + i);
+                System.out.println("Try #" + i + " Choose a number between 0 and 100");
                 int userNum = askNum();
 
                 if (userNum > myNum) {
@@ -25,6 +30,10 @@ public class Main {
                 } else {
                     System.out.println("correct - YOU WON");
                     userLost = false;
+                    GameResult r = new GameResult();
+                    r.name = name;
+                    r.triesCount = i;
+                    results.add(r);
                     break;
                 }
             }
@@ -34,7 +43,16 @@ public class Main {
             System.out.println("Wanna play again ? (Y/N)");
             answer = askYN();
         } while (answer.equals("Y"));
+
+
+        showResults();
         System.out.println("Goodbye !");
+    }
+
+    private static void showResults() {
+        for (GameResult r: results) {
+            System.out.println(r.name + "->" + r.triesCount);
+        }
     }
 
     static String askYN() {
