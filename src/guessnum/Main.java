@@ -13,7 +13,7 @@ public class Main {
         do {
             System.out.println("Enter your name ?");
             String name = scan.next();
-
+            long t1 = System.currentTimeMillis();
 
             int myNum = rand.nextInt(100) + 1;
 
@@ -28,18 +28,25 @@ public class Main {
                 } else if (userNum < myNum) {
                     System.out.println("higher");
                 } else {
+                    long t2 = System.currentTimeMillis();
+                    double time;
+                    time = (t2 - t1) / 1000;
                     System.out.println("correct - YOU WON");
+                    System.out.println("Your time is " + time + " seconds");
                     userLost = false;
                     GameResult r = new GameResult();
                     r.name = name;
                     r.triesCount = i;
+                    r.time = time;
                     results.add(r);
+
                     break;
                 }
             }
             if (userLost == true) {  // mozno prosto (userlost) - avtomaticheski schitaet estj li tam true ili !userLost - not true ?
                 System.out.println("YOU LOST !");
             }
+
             System.out.println("Wanna play again ? (Y/N)");
             answer = askYN();
         } while (answer.equals("Y"));
@@ -50,8 +57,8 @@ public class Main {
     }
 
     private static void showResults() {
-        for (GameResult r: results) {
-            System.out.println(r.name + "->" + r.triesCount);
+        for (GameResult r : results) {
+            System.out.println(r.name + ". Your tries --> " + r.triesCount + ". Your time --> " + r.time + " seconds !");
         }
     }
 
