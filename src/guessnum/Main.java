@@ -113,44 +113,77 @@ public class Main {
 //        }
 
     private static void showResults() {
-       results.stream()
-               .limit(5)
-               .forEach( r -> {
-                   System.out.println(r.name + ". --> " + r.triesCount + ". --> " + r.time / 1000 + " secs !");
-               });
+        results.stream()
+                .limit(5)
+                .forEach(r -> {
+                    System.out.println(r.name + "\t\t\t" + r.triesCount + "\t\t" + r.time / 1000 + " secs !");
+                });
     }
 
+//    private static void showResults() {
+//        int maxLen = findMaxNameLen();
+//
+//        results.stream()
+//                .limit(5)
+//                .forEach(r -> {
+//                    System.out.print(r.name);
+//                    for (int i = 0; i < (maxLen - r.name.length()); i++) {
+//                        System.out.print(" ");
+//                    }
+//                    System.out.printf("%d - %.2fsec\n", r.triesCount, r.time / 1000.0);
+//                });
+//    }
 
-        static String askYN () {
-            String answer;
-            do {
-                answer = scan.next();
-                if (!answer.equals("Y") && !answer.equals("N")) {
-                    System.out.println("Type Y or N only");
-                    continue;   // continue - delaj sledujuwu interaciju cikla - fori , do/while lubogo cikla snachala
-                } else {
-                    break;
-                }
-            } while (true);
-            return answer;
+//    private static int findMaxNameLen() {
+//        int result = 0;
+//        for (GameResult r : results) {
+//            if (result < r.name.length()) {
+//                result = r.name.length();
+//            }
+//        }
+//        return result;
+//    }
 
-        }
+//      private static int findMaxNameLen() {
+//        return results.stream()
+//                .map(r->r.name)
+//                .map(n->n.length())
+//                .max(Comparator.naturalOrder())
+//                .get();
+//    }
 
-        static int askNum () {
-            int answer;
-            do {
-                try {
-                    answer = scan.nextInt();
-                } catch (InputMismatchException k) {
-                    System.out.println("This isn't a number");
-                    scan.next();
-                    continue;
-                }
-                if (answer < 0 || answer > 100) {
-                    System.out.println("Please enter in 0 - 100 range");
-                } else {
-                    return answer;
-                }
-            } while (true);
-        }
+
+    static String askYN() {
+        String answer;
+        do {
+            answer = scan.next();
+            if (!answer.equals("Y") && !answer.equals("N")) {
+                System.out.println("Type Y or N only");
+                continue;   // continue - delaj sledujuwu interaciju cikla - fori , do/while lubogo cikla snachala
+            } else {
+                break;
+            }
+        } while (true);
+        return answer;
+
     }
+
+    static int askNum() {
+        int answer;
+        do {
+            try {
+                answer = scan.nextInt();
+            } catch (InputMismatchException k) {
+                System.out.println("This isn't a number");
+                scan.next();
+                continue;
+            }
+            if (answer < 0 || answer > 100) {
+                System.out.println("Please enter in 0 - 100 range");
+            } else {
+                return answer;
+            }
+        } while (true);
+    }
+}
+
